@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(rm \"G:/personalService/.claude/epics/personal-service-manager/00\"*.md)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
