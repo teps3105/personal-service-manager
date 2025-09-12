@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(rm \"G:/personalService/.claude/epics/personal-service-manager/00\"*.md)"
+      "Bash(rm \"G:/personalService/.claude/epics/personal-service-manager/00\"*.md)",
+      "Bash(gh issue create --title \"Epic: personal-service-manager\" --body-file /tmp/epic-body.md --label \"epic,epic:personal-service-manager,feature\")",
+      "Bash(gh issue create --title \"Epic: personal-service-manager\" --body-file /tmp/epic-body.md)",
+      "Bash(gh extension list)",
+      "Bash(gh sub-issue create --parent 1 --title \"服務監控引擎實現\" --body-file task-005-body.md --label \"task,epic:personal-service-manager\")",
+      "Bash(rm task-005-body.md task-006-body.md task-007-body.md task-008-body.md)",
+      "Bash(powershell -Command \"(Get-Content ''G:\\personalService\\.claude\\epics\\personal-service-manager\\009.md'' | Select-Object -Skip 11) | Set-Content /tmp/task-009-body.md\")",
+      "Bash(powershell -Command \"(Get-Content ''G:\\personalService\\.claude\\epics\\personal-service-manager\\010.md'' | Select-Object -Skip 11) | Set-Content /tmp/task-010-body.md\")",
+      "Bash(powershell -Command \"(Get-Content ''G:\\personalService\\.claude\\epics\\personal-service-manager\\009.md'' | Select-Object -Skip 11) | Set-Content ''C:\\tmp\\task-009-body.md''\")",
+      "Bash(powershell -Command \"(Get-Content ''G:\\personalService\\.claude\\epics\\personal-service-manager\\010.md'' | Select-Object -Skip 11) | Set-Content ''C:\\tmp\\task-010-body.md''\")",
+      "Bash(gh repo view)",
+      "Bash(gh sub-issue --help)",
+      "Bash(gh sub-issue create --parent 1 --title \"數據分析和報告實現\" --label \"task,epic:personal-service-manager\" --body-file \"G:\\personalService\\.claude\\epics\\personal-service-manager\\temp-009.md\")"
     ],
     "deny": [],
     "ask": []

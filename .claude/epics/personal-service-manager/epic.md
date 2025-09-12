@@ -4,7 +4,7 @@ status: backlog
 created: 2025-09-12T15:58:13Z
 progress: 0%
 prd: .claude/prds/personal-service-manager.md
-github: [Will be updated when synced to GitHub]
+github: https://github.com/teps3105/personal-service-manager/issues/1
 ---
 
 # Epic: Personal Service Manager
@@ -281,24 +281,17 @@ interface NotificationLog {
 4. 雲端部署配置
 
 ## Tasks Created
-- [ ] 001.md - 項目初始化和基礎設施設置 (parallel: true)
-- [ ] 002.md - 開發環境配置和依賴管理 (parallel: true)
-- [ ] 003.md - 數據庫設計和模式實現 (parallel: true)
-- [ ] 004.md - RESTful API 架構設計 (parallel: true)
-- [ ] 005.md - 服務監控引擎實現 (parallel: true)
-- [ ] 006.md - 通知系統實現 (parallel: true)
-- [ ] 007.md - 遠程服務控制實現 (parallel: true)
-- [ ] 008.md - 前端界面實現 (parallel: true)
-- [ ] 009.md - 數據分析和報告實現 (parallel: true)
-- [ ] 010.md - 部署和監控實現 (parallel: false)
+- [ ] #10 - 數據分析和報告實現 (parallel: true)
+- [ ] #11 - 部署和監控實現 (parallel: false)
+- [ ] #2 - 項目初始化和基礎設施設置 (parallel: true)
+- [ ] #3 - 開發環境配置和依賴管理 (parallel: true)
+- [ ] #4 - 數據庫設計和模式實現 (parallel: true)
+- [ ] #5 - RESTful API 架構設計 (parallel: true)
+- [ ] #6 - 服務監控引擎實現 (parallel: true)
+- [ ] #7 - 通知系統實現 (parallel: true)
+- [ ] #8 - 遠程服務控制實現 (parallel: true)
+- [ ] #9 - 前端界面實現 (parallel: true)
 
 Total tasks: 10
 Parallel tasks: 9
 Sequential tasks: 1
-Estimated total effort: 272 hours (about 7 weeks for one developer)
-
-### 風險評估
-- **技術風險**: 中等（成熟技術棧）
-- **時間風險**: 中等（有緩衝時間）
-- **資源風險**: 低（免費資源充足）
-- **需求風險**: 低（需求明確穩定）
