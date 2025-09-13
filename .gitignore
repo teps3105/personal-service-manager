@@ -1,0 +1,343 @@
+# Personal Service Manager - .gitignore
+# Comprehensive ignore patterns for Node.js, Vue.js, Supabase, Vercel, and development tools
+
+# =============================================================================
+# Environment and Secrets
+# =============================================================================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+.env.staging
+*.key
+*.pem
+*.p12
+*.crt
+*.cert
+
+# Secrets and sensitive files
+secrets/
+credentials/
+api-keys/
+config/keys/
+
+# =============================================================================
+# Dependencies
+# =============================================================================
+# Node.js dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Package manager lock files - comment out if you want to commit them
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# =============================================================================
+# Build and Distribution
+# =============================================================================
+# Vue.js build output
+dist/
+build/
+.output/
+
+# Nuxt.js build output (if using)
+.nuxt/
+
+# Next.js build output (if using)
+.next/
+
+# Static site generators
+public/
+_site/
+
+# =============================================================================
+# Logs
+# =============================================================================
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# =============================================================================
+# Coverage and Testing
+# =============================================================================
+coverage/
+.nyc_output/
+test-results/
+test-reports/
+
+# Test temporary files
+.tmp/
+.temp/
+*.tmp
+*.temp
+
+# =============================================================================
+# IDE and Editor Files
+# =============================================================================
+# Visual Studio Code
+.vscode/
+.vscode-test/
+
+# WebStorm/IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# Vim
+*.swp
+*.swo
+*~
+
+# Emacs
+*~
+\#*\#
+.\#*
+
+# =============================================================================
+# OS Files
+# =============================================================================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
+
+# =============================================================================
+# Database and Storage
+# =============================================================================
+# Local database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Database dumps
+*.sql
+*.sql.gz
+*.backup
+*.bak
+
+# Supabase local development
+supabase/.branches/
+supabase/.git/
+supabase/logs/
+supabase/temp/
+
+# File uploads
+uploads/
+temp-uploads/
+media/
+files/
+
+# =============================================================================
+# Cache
+# =============================================================================
+.cache/
+.cache-loader/
+.parcel-cache/
+.vuepress/dist/
+
+# Temporary cache files
+*.cache
+*.tmp
+*.temp
+
+# =============================================================================
+# Development Tools
+# =============================================================================
+# Docker
+.dockerignore
+Dockerfile.local
+docker-compose.override.yml
+docker-compose.local.yml
+
+# Vercel
+.vercel
+
+# Netlify
+netlify.toml.local
+.netlify/
+
+# ESLint
+.eslintcache
+
+# Prettier
+.prettierrc.cache
+
+# TypeScript
+*.tsbuildinfo
+
+# =============================================================================
+# Deployment and CI/CD
+# =============================================================================
+# Deployment artifacts
+deploy/
+artifacts/
+build-artifacts/
+
+# CI/CD temporary files
+.ci/
+.github/workflows/local-*.yml
+
+# =============================================================================
+# Documentation and Generated Files
+# =============================================================================
+# Generated documentation
+docs/api/
+docs/generated/
+
+# Auto-generated files
+auto-generated/
+generated/
+
+# Storybook build (if using)
+storybook-static/
+
+# =============================================================================
+# Runtime and Monitoring
+# =============================================================================
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Monitoring and profiling
+*.prof
+heapdump-*.json
+*.heapsnapshot
+
+# =============================================================================
+# Cloud Service Specific
+# =============================================================================
+# Vercel specific
+.vercel/
+vercel-local.json.local
+
+# Netlify specific
+netlify/
+.netlify/
+
+# Supabase specific
+.supabase/
+
+# =============================================================================
+# Development Server
+# =============================================================================
+# Development server ports and sockets
+*.sock
+*.socket
+
+# =============================================================================
+# Virtual Environments
+# =============================================================================
+# Python virtual environments (if used)
+venv/
+env/
+ENV/
+
+# =============================================================================
+# Archive and Backup
+# =============================================================================
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Backup files
+*.backup
+*.bak
+*.old
+*.orig
+
+# =============================================================================
+# Git Related
+# =============================================================================
+# Git merge conflict files
+*.orig
+*.rej
+*.merge
+
+# Git patches
+*.patch
+
+# =============================================================================
+# Miscellaneous
+# =============================================================================
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Lock files
+*.lock
+
+# Configuration backups
+*.config.backup
+*.config.bak
+
+# Local development overrides
+*.local
+*.dev
+*.staging
+
+# Node.js specific
+core.*
+覆盖率报告/
+性能分析/
+
+# =============================================================================
+# Optional: Uncomment these if you want to include them in version control
+# =============================================================================
+# Package manager lock files (recommended for reproducible builds)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Test coverage reports (uncomment to commit coverage)
+# coverage/
+
+# Storybook build (uncomment to commit)
+# storybook-static/
+
+# =============================================================================
+# Project Specific
+# =============================================================================
+# Personal Service Manager specific patterns
+service-logs/
+user-data/
+config/local*
+dev-data/
+seed-data/
+
+# Cloud function builds (if using)
+functions/build/
+functions/dist/

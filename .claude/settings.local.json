@@ -13,7 +13,9 @@
       "Bash(powershell -Command \"(Get-Content ''G:\\personalService\\.claude\\epics\\personal-service-manager\\010.md'' | Select-Object -Skip 11) | Set-Content ''C:\\tmp\\task-010-body.md''\")",
       "Bash(gh repo view)",
       "Bash(gh sub-issue --help)",
-      "Bash(gh sub-issue create --parent 1 --title \"數據分析和報告實現\" --label \"task,epic:personal-service-manager\" --body-file \"G:\\personalService\\.claude\\epics\\personal-service-manager\\temp-009.md\")"
+      "Bash(gh sub-issue create --parent 1 --title \"數據分析和報告實現\" --label \"task,epic:personal-service-manager\" --body-file \"G:\\personalService\\.claude\\epics\\personal-service-manager\\temp-009.md\")",
+      "Read(//g/epic-personal-service-manager/**)",
+      "mcp__spec-workflow-mcp__specs-workflow"
     ],
     "deny": [],
     "ask": []

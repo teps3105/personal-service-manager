@@ -1,0 +1,258 @@
+name: Code Quality Checks
+
+on:
+  push:
+    branches: [ main, develop, feature/* ]
+  pull_request:
+    branches: [ main, develop ]
+  schedule:
+    # Run daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  # ESLint check
+  eslint:
+    name: ESLint Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run ESLint
+      run: npm run lint
+    
+    - name: Upload ESLint results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: eslint-results
+        path: eslint-report.json
+
+  # Prettier check
+  prettier:
+    name: Prettier Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run Prettier check
+      run: npm run format:check
+    
+    - name: Upload Prettier diff
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: prettier-diff
+        path: prettier-diff.txt
+
+  # TypeScript check
+  typescript:
+    name: TypeScript Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run TypeScript check
+      run: npm run type-check
+    
+    - name: Upload TypeScript errors
+      if: failure()
+      uses: actions/upload-artifact@v3
+      with:
+        name: typescript-errors
+        path: ts-errors.txt
+
+  # Dependency vulnerability scan
+  vulnerability-scan:
+    name: Vulnerability Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Run npm audit
+      run: npm audit --audit-level=moderate
+      continue-on-error: true
+    
+    - name: Run npm audit fix
+      run: npm audit fix
+      continue-on-error: true
+
+  # Code complexity analysis
+  complexity:
+    name: Code Complexity Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install complexity analysis tools
+      run: npm install -g plato
+    
+    - name: Generate complexity report
+      run: |
+        plato -r -d complexity-report -t "Personal Service Manager" -x .json,.test.js,.spec.js frontend/src backend/src
+    
+    - name: Upload complexity report
+      uses: actions/upload-artifact@v3
+      with:
+        name: complexity-report
+        path: complexity-report/
+
+  # Performance budget check
+  performance-budget:
+    name: Performance Budget Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Build frontend
+      run: npm run build:frontend
+    
+    - name: Check bundle sizes
+      run: |
+        # Check if bundle size exceeds thresholds
+        BUNDLE_SIZE=$(stat -c%s frontend/dist/assets/index-*.js | head -1)
+        if [ $BUNDLE_SIZE -gt 500000 ]; then
+          echo "Bundle size too large: $BUNDLE_SIZE bytes"
+          exit 1
+        fi
+        echo "Bundle size OK: $BUNDLE_SIZE bytes"
+    
+    - name: Upload bundle analysis
+      uses: actions/upload-artifact@v3
+      with:
+        name: bundle-analysis
+        path: frontend/dist/assets/
+
+  # License compliance check
+  license-check:
+    name: License Compliance Check
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Install license checker
+      run: npm install -g license-checker
+    
+    - name: Check licenses
+      run: license-checker --production --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause;ISC'
+      continue-on-error: true
+    
+    - name: Upload license report
+      uses: actions/upload-artifact@v3
+      with:
+        name: license-report
+        path: license-report.json
+
+  # Security best practices
+  security-best-practices:
+    name: Security Best Practices
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+        cache: 'npm'
+    
+    - name: Install dependencies
+      run: npm ci
+    
+    - name: Check for hardcoded secrets
+      run: |
+        # Check for common secret patterns
+        if grep -r -i "password\|secret\|key\|token" --include="*.js" --include="*.ts" --include="*.vue" . | grep -v "test\|spec\|example"; then
+          echo "Potential hardcoded secrets found"
+          exit 1
+        fi
+        echo "No hardcoded secrets found"
+      continue-on-error: true
+    
+    - name: Check for insecure configurations
+      run: |
+        # Check for obvious security issues
+        if grep -r "eval(" --include="*.js" --include="*.ts" . | grep -v "test\|spec"; then
+          echo "Potential eval() usage found"
+          exit 1
+        fi
+        echo "No eval() usage found"
+      continue-on-error: true

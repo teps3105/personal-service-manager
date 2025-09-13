@@ -1,0 +1,28 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "backend/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/backend/server.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "VERCEL_ENV": "development"
+  },
+  "devCommand": "cd backend && npm run dev",
+  "installCommand": "cd backend && npm install",
+  "functions": {
+    "backend/server.js": {
+      "runtime": "nodejs18.x",
+      "memory": 256,
+      "maxDuration": 10
+    }
+  }
+}
